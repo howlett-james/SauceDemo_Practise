@@ -1,6 +1,5 @@
 package pages;
 
-import Constants.FrameworkConstants;
 import base.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,15 +7,15 @@ import utils.Waits;
 
 public class LoginPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
-    private By usernameField = By.id("user-name");
-    private By passwordField = By.name("password");
-    private By loginButton = By.id("login-button");
-    private By errorMessage = By.cssSelector("[data-test='error']");
+    private final By usernameField = By.id("user-name");
+    private final By passwordField = By.name("password");
+    private final By loginButton = By.id("login-button");
+    private final By errorMessage = By.cssSelector("[data-test='error']");
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
+    public LoginPage() {
+        this.driver = DriverFactory.getDriver();
     }
 
     public LoginPage enterUsername(String uname) {
@@ -29,23 +28,15 @@ public class LoginPage {
         return this;
     }
 
-    public LoginPage clickLogin() {
+    public void clickLogin() {
         Waits.waitForClickability(driver, loginButton).click();
-        return this;
-    }
-
-    public LoginPage login(String uname, String pwd) {
-        return enterUsername(uname)
-                .enterPassword(pwd)
-                .clickLogin();
-    }
-
-    public LoginPage loginWithStandardUser() {
-        return login(FrameworkConstants.STANDARD_USER, FrameworkConstants.PASSWORD);
     }
 
     public String getErrorMessage() {
         return Waits.waitForVisibility(driver, errorMessage).getText();
     }
 
+    public void clickLoginExpectingFailure() {
+        driver.findElement(loginButton).click();
+    }
 }

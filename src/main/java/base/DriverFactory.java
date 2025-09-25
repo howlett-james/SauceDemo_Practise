@@ -3,8 +3,13 @@ package base;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriverFactory {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
@@ -17,12 +22,14 @@ public class DriverFactory {
         switch (browser.toLowerCase()) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
-                driver.set(new ChromeDriver());
+                ChromeOptions options = getChromeOptions();
+                driver.set(new ChromeDriver(options));
                 break;
 
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                driver.set(new FirefoxDriver());
+                FirefoxOptions ffOptions = getFirefoxOptions();
+                driver.set(new FirefoxDriver(ffOptions));
                 break;
 
             case "edge":
@@ -36,6 +43,28 @@ public class DriverFactory {
 
         driver.get().manage().window().maximize();
         return driver.get();
+    }
+
+    private static ChromeOptions getChromeOptions() {
+        ChromeOptions options = new ChromeOptions();
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+        options.setExperimentalOption("prefs", prefs);
+
+        options.addArguments("--disable-save-password-bubble");
+        options.addArguments("--disable-infobars");
+        options.addArguments("--disable-notifications");
+        return options;
+    }
+
+    private static FirefoxOptions getFirefoxOptions() {
+        FirefoxOptions ffOptions = new FirefoxOptions();
+        Map<String, Object> prefs = new HashMap<>();
+        ffOptions.addPreference("signon.rememberSignons", false);
+        ffOptions.addPreference("signon.autofillForms", false);
+        ffOptions.addPreference("signon.autofillForms.http", false);
+        return ffOptions;
     }
 
     public static WebDriver getDriver() {

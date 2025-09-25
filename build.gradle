@@ -10,13 +10,17 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.testng/testng
-    testImplementation group: 'org.testng', name: 'testng', version: '7.11.0'
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.35.0'
     testImplementation 'org.hamcrest:hamcrest:2.2'
     // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '6.3.2'
+    // https://mvnrepository.com/artifact/com.github.mifmif/generex
+    implementation group: 'com.github.mifmif', name: 'generex', version: '1.0.2'
+    // https://mvnrepository.com/artifact/com.github.krraghavan/xeger
+    implementation group: 'com.github.krraghavan', name: 'xeger', version: '1.0.0-RELEASE'
+    // https://mvnrepository.com/artifact/org.testng/testng
+    testImplementation group: 'org.testng', name: 'testng', version: '7.11.0'
 }
 
 test {

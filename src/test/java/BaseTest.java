@@ -1,18 +1,16 @@
-package base;
-
-import org.openqa.selenium.WebDriver;
+import base.DriverFactory;
 
 import Constants.FrameworkConstants;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
-    protected WebDriver driver;
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod
     public void setUp() {
-        driver = DriverFactory.initDriver(FrameworkConstants.CHROME);
-        driver.get(FrameworkConstants.SAUCEDEMO_URL);
+        DriverFactory.initDriver(FrameworkConstants.BROWSER);
+        DriverFactory.getDriver().manage().window().maximize();
+        DriverFactory.getDriver().get(FrameworkConstants.URL);
     }
 
     @AfterMethod
