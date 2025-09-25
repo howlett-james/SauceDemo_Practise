@@ -26,4 +26,12 @@ public class LoginTest extends BaseTest{
                 .clickLoginExpectingFailure();
         Assert.assertEquals(new LoginPage().getErrorMessage(), ErrorMessages.EMPTY_USERNAME, "Error message mismatch!");
     }
+@Test(priority = 2,description = "Negative test: login with blank")
+    public void invalid_Specialcharacter(){
+        new LoginPage()
+                .enterUsername("$^^##$^")
+                .enterPassword("&$%$^")
+                .clickLoginExpectingFailure();
+        Assert.assertEquals(new LoginPage().getErrorMessage(),ErrorMessages.SPECIAL_CHR,"Error message mismatch");
+    }
 }
