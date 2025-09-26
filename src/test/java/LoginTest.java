@@ -18,7 +18,18 @@ public class LoginTest extends BaseTest{
         Assert.assertEquals(new HomePage().getTitle(),FrameworkConstants.TITLE);
     }
 
-    @Test(priority = 1, description = "Negative test: login with blank")
+    @Test (priority = 1, description = "Positive test: login with valid credentials")
+    public void testValidLoginWithRandomCreds() {
+        new LoginPage()
+                .enterUsername(new LoginPage().getRandomCredential())
+                .enterPassword(FrameworkConstants.PASSWORD)
+                .clickLogin();
+        Assert.assertTrue(new HomePage().isInventoryPageOpened(),
+                "Login failed: Inventory page not opened.");
+        Assert.assertEquals(new HomePage().getTitle(),FrameworkConstants.TITLE);
+    }
+
+    @Test(priority = 2, description = "Negative test: login with blank")
     public void testInvalidLogin_BlankCredentials() {
         new LoginPage()
                 .enterUsername("")
@@ -26,7 +37,7 @@ public class LoginTest extends BaseTest{
                 .clickLoginExpectingFailure();
         Assert.assertEquals(new LoginPage().getErrorMessage(), ErrorMessages.EMPTY_USERNAME, "Error message mismatch!");
     }
-@Test(priority = 2,description = "Negative test: login with blank")
+    @Test(priority = 3,description = "Negative test: login with blank")
     public void invalid_Specialcharacter(){
         new LoginPage()
                 .enterUsername("$^^##$^")

@@ -5,10 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.Waits;
 
+import java.util.Random;
+
 public class LoginPage {
 
     private final WebDriver driver;
-
+    private Random random = new Random();
     private final By usernameField = By.id("user-name");
     private final By passwordField = By.name("password");
     private final By loginButton = By.id("login-button");
@@ -38,5 +40,10 @@ public class LoginPage {
 
     public void clickLoginExpectingFailure() {
         driver.findElement(loginButton).click();
+    }
+
+    public String getRandomCredential() {
+        String[] lines = driver.findElement(By.id("login_credentials")).getText().split("\\r?\\n");
+        return lines[random.nextInt(lines.length)];
     }
 }
