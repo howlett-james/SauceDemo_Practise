@@ -60,7 +60,6 @@ public class DriverFactory {
 
     private static FirefoxOptions getFirefoxOptions() {
         FirefoxOptions ffOptions = new FirefoxOptions();
-        Map<String, Object> prefs = new HashMap<>();
         ffOptions.addPreference("signon.rememberSignons", false);
         ffOptions.addPreference("signon.autofillForms", false);
         ffOptions.addPreference("signon.autofillForms.http", false);
