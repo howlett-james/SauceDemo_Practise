@@ -27,4 +27,14 @@ public class Waits {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.TIMEOUT));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+    public static boolean isVisible(WebDriver driver, By locator){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.TIMEOUT));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

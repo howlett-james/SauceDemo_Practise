@@ -55,6 +55,7 @@ public class DriverFactory {
         options.addArguments("--disable-save-password-bubble");
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-notifications");
+        options.addArguments("--incognito");
         return options;
     }
 
