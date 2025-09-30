@@ -38,6 +38,11 @@ public class LoginPage {
         Waits.waitForClickability(driver, loginButton).click();
     }
 
+    public HomePage clickLoginToInventory(){
+        clickLogin();
+        return new HomePage();
+    }
+
     public String getErrorMessage() {
         return Waits.waitForVisibility(driver, errorMessage).getText();
     }
