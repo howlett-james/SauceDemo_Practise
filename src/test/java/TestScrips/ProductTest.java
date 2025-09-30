@@ -2,7 +2,6 @@ package TestScrips;
 
 import Assertions.ProductPageAsserts;
 import Constants.FrameworkConstants;
-import models.Product;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.ProductSelection;

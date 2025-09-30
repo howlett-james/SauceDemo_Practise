@@ -11,7 +11,6 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         DriverFactory.initDriver(FrameworkConstants.BROWSER);
-        DriverFactory.getDriver().manage().window().maximize();
         DriverFactory.getDriver().get(FrameworkConstants.URL);
     }
 
