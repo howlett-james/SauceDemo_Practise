@@ -10,7 +10,7 @@ import pages.ProductSelection;
 
 public class ProductTest extends BaseTest {
 
-    @Test(priority = 0)
+    @Test
     public void testRandomProduct(){
         ProductSelection selection = new LoginPage()
                 .enterUsername(FrameworkConstants.USERNAME)
