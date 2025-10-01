@@ -3,6 +3,8 @@ package TestScrips;
 import Assertions.ProductPageAsserts;
 import Constants.FrameworkConstants;
 import org.testng.annotations.Test;
+
+import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductSelection;
 
@@ -26,5 +28,6 @@ public class ProductTest extends BaseTest {
                 selection.getProductPage().getCartItemDetails(),
                 selection.getSelectedProduct()
         );
+        new CartPage().clickCheckout();
     }
 }
