@@ -2,29 +2,30 @@ package TestScrips;
 
 import Assertions.ProductPageAsserts;
 import Constants.FrameworkConstants;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import pages.CartPage;
 import pages.LoginPage;
-import pages.ProductSelection;
+import utils.TestContext;
 
 public class ProductTest extends BaseTest {
 
-    @Test(priority = 0)
+    @Test
     public void testRandomProduct(){
-        ProductSelection selection = new LoginPage()
+        new LoginPage()
                 .enterUsername(FrameworkConstants.USERNAME)
                 .enterPassword(FrameworkConstants.PASSWORD)
                 .clickLoginToInventory()
-                .clickAnItem();
-        ProductPageAsserts.verifyProduct(
-                selection.getProductPage().getProductDetails(),
-                selection.getSelectedProduct()
-        );
-        selection.getProductPage()
-                        .addToCart()
-                                .navigateToCart();
-        ProductPageAsserts.verifyProduct(
-                selection.getProductPage().getCartItemDetails(),
-                selection.getSelectedProduct()
-        );
+                .clickAnItem()
+                .addToCart()
+                .navigateToCart();
+        ProductPageAsserts.verifyProduct(new CartPage().getCartItemDetails());
+        new CartPage()
+                .productCheckout()
+                .proceedCheckout()
+                .confirmOrder();
+        TestContext.clear();
+        Assert.assertEquals(new CartPage().getOrderHeader(),FrameworkConstants.orderHeader);
     }
 }

@@ -51,7 +51,7 @@ public class DriverFactory {
         prefs.put("credentials_enable_service", false);
         prefs.put("profile.password_manager_enabled", false);
         options.setExperimentalOption("prefs", prefs);
-        options.addArguments("--headless=new");
+//        options.addArguments("--headless=new");
         options.addArguments("--disable-save-password-bubble");
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-notifications");

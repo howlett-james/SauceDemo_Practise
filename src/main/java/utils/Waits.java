@@ -14,22 +14,22 @@ public class Waits {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.TIMEOUT));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-    public static WebElement waitForVisibility(WebDriver driver, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.TIMEOUT));
-        return wait.until(ExpectedConditions.visibilityOf(element));
-    }
     public static WebElement waitForClickability(WebDriver driver, By locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.TIMEOUT));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
-    public static WebElement waitForClickability(WebDriver driver, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.TIMEOUT));
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
     public static boolean isVisible(WebDriver driver, By locator){
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.TIMEOUT));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            waitForVisibility(driver,locator);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static boolean isClickable(WebDriver driver,By locator){
+        try {
+            waitForClickability(driver,locator);
             return true;
         }catch (Exception e){
             e.printStackTrace();
