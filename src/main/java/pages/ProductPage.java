@@ -22,7 +22,7 @@ public class ProductPage {
     }
 
     public ProductPage addToCart(){
-        if(!driver.findElement(btn).getText().equals("REMOVE")){
+        if(!Waits.waitForVisibility(driver,btn).getText().equals("REMOVE")){
             Waits.waitForClickability(driver,btn).click();
         }
         return this;

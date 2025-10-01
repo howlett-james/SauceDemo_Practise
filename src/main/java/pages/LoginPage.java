@@ -48,7 +48,7 @@ public class LoginPage {
     }
 
     public void clickLoginExpectingFailure() {
-        driver.findElement(loginButton).click();
+        Waits.waitForClickability(driver,loginButton).click();
     }
 
     public List<String> getCredentials(){
