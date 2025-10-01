@@ -21,18 +21,6 @@ public class ProductPage {
         this.driver = DriverFactory.getDriver();
     }
 
-    public Product getProductDetails() {
-        String name = driver.findElement(productTitle).getText();
-        String price = driver.findElement(productPrice).getText();
-        return new Product(name, price);
-    }
-
-    public Product getCartItemDetails(){
-        String name = driver.findElement(cartItemName).getText();
-        String price = driver.findElement(cartItemPrice).getText();
-        return new Product(name, price);
-    }
-
     public ProductPage addToCart(){
         if(!driver.findElement(btn).getText().equals("REMOVE")){
             Waits.waitForClickability(driver,btn).click();

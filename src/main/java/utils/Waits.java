@@ -36,4 +36,14 @@ public class Waits {
             return false;
         }
     }
+    public static boolean isClickable(WebDriver driver,By locator){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(FrameworkConstants.TIMEOUT));
+            wait.until(ExpectedConditions.elementToBeClickable(locator));
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

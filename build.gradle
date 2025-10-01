@@ -21,6 +21,8 @@ dependencies {
     implementation group: 'com.github.krraghavan', name: 'xeger', version: '1.0.0-RELEASE'
     // https://mvnrepository.com/artifact/org.testng/testng
     testImplementation group: 'org.testng', name: 'testng', version: '7.11.0'
+    // https://mvnrepository.com/artifact/com.github.javafaker/javafaker
+    implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
 }
 
 test {

@@ -5,6 +5,7 @@ import models.Product;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utils.TestContext;
 
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +27,7 @@ public class HomePage {
         return driver.getTitle();
     }
 
-    public ProductSelection clickAnItem() {
+    public ProductPage clickAnItem() {
         List<WebElement> items = driver.findElements(inventoryLists);
         WebElement randomItem = items.get(new Random().nextInt(items.size()));
 
@@ -35,9 +36,9 @@ public class HomePage {
 
         randomItem.findElement(By.className("inventory_item_name")).click();
 
-        Product selectedProduct = new Product(name, price);
-        ProductPage productPage = new ProductPage();
+        // store in TestContext
+        TestContext.setSelectedProduct(new Product(name, price));
 
-        return new ProductSelection(productPage, selectedProduct);
+        return new ProductPage();
     }
 }
