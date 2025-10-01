@@ -3,6 +3,7 @@ package TestScrips;
 import Assertions.ProductPageAsserts;
 import Constants.FrameworkConstants;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import pages.CartPage;
@@ -10,22 +11,28 @@ import pages.LoginPage;
 import utils.TestContext;
 
 public class ProductTest extends BaseTest {
+    LoginPage loginPage;
+    CartPage cartPage;
+
+    @BeforeMethod
+    public void setUpTest(){
+        loginPage = new LoginPage();
+        cartPage = new CartPage();
+    }
 
     @Test
     public void testRandomProduct(){
-        new LoginPage()
-                .enterUsername(FrameworkConstants.USERNAME)
+        loginPage.enterUsername(FrameworkConstants.USERNAME)
                 .enterPassword(FrameworkConstants.PASSWORD)
                 .clickLoginToInventory()
                 .clickAnItem()
                 .addToCart()
                 .navigateToCart();
-        ProductPageAsserts.verifyProduct(new CartPage().getCartItemDetails());
-        new CartPage()
-                .productCheckout()
+        ProductPageAsserts.verifyProduct(cartPage.getCartItemDetails());
+        cartPage.productCheckout()
                 .proceedCheckout()
                 .confirmOrder();
         TestContext.clear();
-        Assert.assertEquals(new CartPage().getOrderHeader(),FrameworkConstants.orderHeader);
+        Assert.assertEquals(cartPage.getOrderHeader(),FrameworkConstants.orderHeader);
     }
 }

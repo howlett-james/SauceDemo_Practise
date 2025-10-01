@@ -8,8 +8,6 @@ import base.DriverFactory;
 import models.Product;
 import utils.Waits;
 
-import java.util.Random;
-
 public class CartPage {
     private final WebDriver driver;
     private final By checkoutButton = By.cssSelector(".btn_action.checkout_button");
@@ -26,6 +24,7 @@ public class CartPage {
 
     public CartPage() {
         this.driver = DriverFactory.getDriver();
+        if (this.driver == null) throw new IllegalStateException("WebDriver is null");
     }
 
     public CartPage productCheckout() {
@@ -48,13 +47,8 @@ public class CartPage {
     }
 
     public CartPage confirmOrder(){
-        try {
-            if(Waits.isClickable(driver,finishBtn)){
-                Waits.waitForClickability(driver,finishBtn).click();
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
+        if(Waits.isClickable(driver,finishBtn)){
+            Waits.waitForClickability(driver,finishBtn).click();
         }
         return this;
     }

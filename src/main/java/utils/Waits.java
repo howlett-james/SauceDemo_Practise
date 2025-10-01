@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class Waits {
     public static WebElement waitForVisibility(WebDriver driver, By locator) {
@@ -17,6 +18,10 @@ public class Waits {
     public static WebElement waitForClickability(WebDriver driver, By locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.TIMEOUT));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+    public static List<WebElement> waitForVisibilityOfAllElements(WebDriver driver, By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.TIMEOUT));
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
     public static boolean isVisible(WebDriver driver, By locator){
         try {
