@@ -14,7 +14,7 @@ import java.util.Map;
 public class DriverFactory {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public static WebDriver initDriver(String browser) {
+    public static WebDriver initDriver(String browser, boolean headless) {
         if (browser == null || browser.isEmpty()) {
             throw new IllegalArgumentException("Browser must be provided.");
         }
@@ -22,13 +22,13 @@ public class DriverFactory {
         switch (browser.toLowerCase()) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
-                ChromeOptions options = getChromeOptions();
+                ChromeOptions options = getChromeOptions(headless);
                 driver.set(new ChromeDriver(options));
                 break;
 
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                FirefoxOptions ffOptions = getFirefoxOptions();
+                FirefoxOptions ffOptions = getFirefoxOptions(headless);
                 driver.set(new FirefoxDriver(ffOptions));
                 break;
 
@@ -45,25 +45,26 @@ public class DriverFactory {
         return driver.get();
     }
 
-    private static ChromeOptions getChromeOptions() {
+    private static ChromeOptions getChromeOptions(boolean headless) {
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("credentials_enable_service", false);
         prefs.put("profile.password_manager_enabled", false);
         options.setExperimentalOption("prefs", prefs);
-//        options.addArguments("--headless=new");
         options.addArguments("--disable-save-password-bubble");
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-notifications");
         options.addArguments("--incognito");
+        if(headless) options.addArguments("--headless=new");
         return options;
     }
 
-    private static FirefoxOptions getFirefoxOptions() {
+    private static FirefoxOptions getFirefoxOptions(boolean headless) {
         FirefoxOptions ffOptions = new FirefoxOptions();
         ffOptions.addPreference("signon.rememberSignons", false);
         ffOptions.addPreference("signon.autofillForms", false);
         ffOptions.addPreference("signon.autofillForms.http", false);
+        if(headless) ffOptions.addArguments("--headless");
         return ffOptions;
     }
 

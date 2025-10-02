@@ -25,6 +25,8 @@ dependencies {
     implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
 }
 
-tasks.test {
-    useTestNG()
+test {
+    useTestNG(){
+        suites 'src/test/resources/testng.xml'
+    }
 }
