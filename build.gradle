@@ -26,9 +26,7 @@ dependencies {
 }
 
 test {
-    useTestNG()
-    reports {
-        junitXml.required.set(false)
-        html.required.set(true)
+    useTestNG(){
+        suites 'src/test/resources/testng.xml'
     }
 }

@@ -12,7 +12,7 @@ import java.util.Random;
 public class LoginPage {
 
     private final WebDriver driver;
-    private Random random = new Random();
+    private static final Random random = new Random();
 
     private final By usernameField = By.id("user-name");
     private final By passwordField = By.name("password");
@@ -22,6 +22,7 @@ public class LoginPage {
 
     public LoginPage() {
         this.driver = DriverFactory.getDriver();
+        if (this.driver == null) throw new IllegalStateException("WebDriver is null");
     }
 
     public LoginPage enterUsername(String uname) {

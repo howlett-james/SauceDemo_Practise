@@ -8,19 +8,20 @@ import org.openqa.selenium.WebElement;
 import utils.TestContext;
 import utils.Waits;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
 public class HomePage {
     private final WebDriver driver;
+    private static final Random random = new Random();
     private final By inventoryLists = By.cssSelector(".inventory_list .inventory_item");
     private final By pName = By.className("inventory_item_name");
     private final By pPrice = By.className("inventory_item_price");
 
     public HomePage() {
         this.driver = DriverFactory.getDriver();
+        if (this.driver == null) throw new IllegalStateException("WebDriver is null");
     }
 
     public boolean isInventoryPageOpened() {
@@ -32,8 +33,9 @@ public class HomePage {
     }
 
     public ProductPage clickAnItem() {
-        List<WebElement> items = Collections.singletonList(Waits.waitForVisibility(driver, inventoryLists));
-        WebElement randomItem = items.get(new Random().nextInt(items.size()));
+        List<WebElement> items = Waits.waitForVisibilityOfAllElements(driver, inventoryLists);
+        if (items.isEmpty()) throw new IllegalStateException("No inventory items found!");
+        WebElement randomItem = items.get(random.nextInt(items.size()));
 
         String name = randomItem.findElement(pName).getText();
         String price = randomItem.findElement(pPrice).getText();

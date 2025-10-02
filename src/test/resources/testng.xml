@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Suite" parallel="false">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="headless" value="false"/>
+
+    <test name="Tests">
+        <classes>
+            <class name="TestScrips.LoginTest"/>
+            <class name="TestScrips.ProductTest"/>
+        </classes>
+    </test>
+</suite>
