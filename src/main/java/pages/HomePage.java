@@ -1,8 +1,6 @@
 package pages;
 
 import base.DriverFactory;
-import org.apache.hc.core5.util.Asserts;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Objects;
@@ -21,7 +19,4 @@ public class HomePage {
     public String getTitle() {
         return driver.getTitle();
     }
-
-
-    }
-
+}
