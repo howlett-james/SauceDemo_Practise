@@ -46,4 +46,30 @@ public class HomePage {
 
         return new ProductPage();
     }
+
+    public ProductPage clickMultipleItems() {
+        List<WebElement> items = Waits.waitForVisibilityOfAllElements(driver, inventoryLists);
+        if (items.isEmpty()) throw new IllegalStateException("No inventory items found!");
+        //1to 6 ---> select= >1  && pick 2 or 3 numbers ---> store in array --> [2,6] 
+        int[] arr =[2,6];
+        int j =0;
+        for(int i=arra[j];i<arr.length();i++){
+            WebElement randomItem = items.get(arr[i]);
+            String name = randomItem.findElement(pName).getText();
+        String price = randomItem.findElement(pPrice).getText();
+
+        randomItem.findElement(".addtoCart").click();
+        j++
+        }
+        /* WebElement randomItem = items.get(random.nextInt(items.size()));
+
+        String name = randomItem.findElement(pName).getText();
+        String price = randomItem.findElement(pPrice).getText();
+
+        randomItem.findElement(pName).click();
+
+        TestContext.setSelectedProduct(new Product(name, price)); */
+
+        return new ProductPage();
+    }
 }
