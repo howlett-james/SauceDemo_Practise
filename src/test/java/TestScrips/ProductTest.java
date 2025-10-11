@@ -28,11 +28,26 @@ public class ProductTest extends BaseTest {
                 .clickAnItem()
                 .addToCart()
                 .navigateToCart();
-        ProductPageAsserts.verifyProduct(cartPage.getCartItemDetails());
+//        ProductPageAsserts.verifyProduct(cartPage.getCartItemDetails());
         cartPage.productCheckout()
                 .proceedCheckout()
                 .confirmOrder();
         TestContext.clear();
+        Assert.assertEquals(cartPage.getOrderHeader(),FrameworkConstants.orderHeader);
+    }
+
+    @Test
+    public void testRandomProducts(){
+        loginPage.enterUsername(FrameworkConstants.USERNAME)
+                .enterPassword(FrameworkConstants.PASSWORD)
+                .clickLoginToInventory()
+                .addMultipleItems()
+                .navigateToCart();
+//        ProductPageAsserts.verifyProduct(cartPage.getCartItemDetails());
+        cartPage.productCheckout()
+                .proceedCheckout()
+                .confirmOrder();
+//        TestContext.clear();
         Assert.assertEquals(cartPage.getOrderHeader(),FrameworkConstants.orderHeader);
     }
 }

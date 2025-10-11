@@ -8,9 +8,7 @@ import org.openqa.selenium.WebElement;
 import utils.TestContext;
 import utils.Waits;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class HomePage {
     private final WebDriver driver;
@@ -18,6 +16,7 @@ public class HomePage {
     private final By inventoryLists = By.cssSelector(".inventory_list .inventory_item");
     private final By pName = By.className("inventory_item_name");
     private final By pPrice = By.className("inventory_item_price");
+    private final By addToCart = By.cssSelector(".btn_primary.btn_inventory");
 
     public HomePage() {
         this.driver = DriverFactory.getDriver();
@@ -47,29 +46,49 @@ public class HomePage {
         return new ProductPage();
     }
 
-    public ProductPage clickMultipleItems() {
+    public ProductPage addMultipleItems() {
         List<WebElement> items = Waits.waitForVisibilityOfAllElements(driver, inventoryLists);
         if (items.isEmpty()) throw new IllegalStateException("No inventory items found!");
-        //1to 6 ---> select= >1  && pick 2 or 3 numbers ---> store in array --> [2,6] 
-        int[] arr =[2,6];
-        int j =0;
-        for(int i=arra[j];i<arr.length();i++){
+        int[] arr = (items.size() > 1)
+                ? random.ints(0, items.size())
+                .distinct()
+                .limit(Math.max(2, random.nextInt(items.size())))
+                .toArray()
+                : new int[0];
+        List<Product> products = new ArrayList<>();
+
+        for (int i : arr) {
             WebElement randomItem = items.get(arr[i]);
             String name = randomItem.findElement(pName).getText();
-        String price = randomItem.findElement(pPrice).getText();
-
-        randomItem.findElement(".addtoCart").click();
-        j++
+            String price = randomItem.findElement(pPrice).getText();
+            products.add(new Product(name, price));
+            randomItem.findElement(addToCart).click();
         }
-        /* WebElement randomItem = items.get(random.nextInt(items.size()));
-
-        String name = randomItem.findElement(pName).getText();
-        String price = randomItem.findElement(pPrice).getText();
-
-        randomItem.findElement(pName).click();
-
-        TestContext.setSelectedProduct(new Product(name, price)); */
-
+        TestContext.setSelectedProducts(products);
         return new ProductPage();
     }
+    /*public ProductPage clickMultipleItems() {
+        List<WebElement> items = Waits.waitForVisibilityOfAllElements(driver, inventoryLists);
+        if (items.isEmpty()) throw new IllegalStateException("No inventory items found!");
+        List<Product> products = new ArrayList<>();
+
+        int size = items.size();
+        if (size < 2) throw new IllegalStateException("Need at least 2 items to add!");
+
+        Set<Integer> selectedIndexes = new HashSet<>();//{4,5,2,1}
+        while (selectedIndexes.size() < 2) {
+            selectedIndexes.add(random.nextInt(size));
+        }
+
+        for (int index : selectedIndexes) {
+            WebElement item = items.get(index);
+            String name = item.findElement(pName).getText();
+            String price = item.findElement(pPrice).getText();
+            products.add(new Product(name, price));
+            item.findElement(addToCart).click();
+            System.out.println("Added: " + name + " | Price: " + price);
+        }
+        TestContext.setSelectedProducts(products);
+        return new ProductPage();
+    }*/
 }
