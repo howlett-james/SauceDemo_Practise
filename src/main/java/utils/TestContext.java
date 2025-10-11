@@ -17,10 +17,6 @@ public class TestContext {
         selectedProducts.get().addAll(products);
     }
 
-    public static void addSelectedProduct(Product product) {
-        selectedProducts.get().add(product);
-    }
-
     public static List<Product> getSelectedProducts() {
         return selectedProducts.get();
     }
