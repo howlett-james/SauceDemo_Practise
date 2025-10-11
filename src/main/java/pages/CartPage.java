@@ -24,7 +24,6 @@ public class CartPage {
     private final By pPrice = By.cssSelector(".inventory_item_price");
     private final By finishBtn = By.cssSelector(".btn_action.cart_button");
     private final By orderHeader = By.cssSelector(".complete-header");
-    private final By orderMsg = By.cssSelector(".complete-text");
 
     public CartPage() {
         this.driver = DriverFactory.getDriver();
