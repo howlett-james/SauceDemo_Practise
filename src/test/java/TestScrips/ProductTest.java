@@ -35,4 +35,19 @@ public class ProductTest extends BaseTest {
         TestContext.clear();
         Assert.assertEquals(cartPage.getOrderHeader(),FrameworkConstants.orderHeader);
     }
+
+    @Test
+    public void testRandomProducts(){
+        loginPage.enterUsername(FrameworkConstants.USERNAME)
+                .enterPassword(FrameworkConstants.PASSWORD)
+                .clickLoginToInventory()
+                .addMultipleItems()
+                .navigateToCart();
+        ProductPageAsserts.verifyAllProducts(cartPage.getAllCartItems());
+        cartPage.productCheckout()
+                .proceedCheckout()
+                .confirmOrder();
+        TestContext.clear();
+        Assert.assertEquals(cartPage.getOrderHeader(),FrameworkConstants.orderHeader);
+    }
 }

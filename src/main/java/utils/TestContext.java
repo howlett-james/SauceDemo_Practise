@@ -1,19 +1,27 @@
 package utils;
 
 import models.Product;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestContext {
-    private static final ThreadLocal<Product> selectedProduct = new ThreadLocal<>();
+
+    private static final ThreadLocal<List<Product>> selectedProducts =
+            ThreadLocal.withInitial(ArrayList::new);
 
     public static void setSelectedProduct(Product product) {
-        selectedProduct.set(product);
+        selectedProducts.get().add(product);
     }
 
-    public static Product getSelectedProduct() {
-        return selectedProduct.get();
+    public static void setSelectedProducts(List<Product> products) {
+        selectedProducts.get().addAll(products);
+    }
+
+    public static List<Product> getSelectedProducts() {
+        return selectedProducts.get();
     }
 
     public static void clear() {
-        selectedProduct.remove();
+        selectedProducts.get().clear();
     }
 }

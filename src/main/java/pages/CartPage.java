@@ -6,7 +6,11 @@ import org.openqa.selenium.WebDriver;
 
 import base.DriverFactory;
 import models.Product;
+import org.openqa.selenium.WebElement;
 import utils.Waits;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CartPage {
     private final WebDriver driver;
@@ -20,7 +24,6 @@ public class CartPage {
     private final By pPrice = By.cssSelector(".inventory_item_price");
     private final By finishBtn = By.cssSelector(".btn_action.cart_button");
     private final By orderHeader = By.cssSelector(".complete-header");
-    private final By orderMsg = By.cssSelector(".complete-text");
 
     public CartPage() {
         this.driver = DriverFactory.getDriver();
@@ -58,6 +61,18 @@ public class CartPage {
         String price = Waits.waitForVisibility(driver,pPrice).getText();
         return new Product(name, price);
     }
+
+    public List<Product> getAllCartItems() {
+        List<WebElement> names = driver.findElements(pName);
+        List<WebElement> prices = driver.findElements(pPrice);
+        List<Product> products = new ArrayList<>();
+
+        for (int i = 0; i < names.size(); i++) {
+            products.add(new Product(names.get(i).getText(), prices.get(i).getText()));
+        }
+        return products;
+    }
+
 
     public String getOrderHeader(){
         return Waits.waitForVisibility(driver,orderHeader).getText();
