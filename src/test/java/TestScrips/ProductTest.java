@@ -28,7 +28,7 @@ public class ProductTest extends BaseTest {
                 .clickAnItem()
                 .addToCart()
                 .navigateToCart();
-//        ProductPageAsserts.verifyProduct(cartPage.getCartItemDetails());
+        ProductPageAsserts.verifyProduct(cartPage.getCartItemDetails());
         cartPage.productCheckout()
                 .proceedCheckout()
                 .confirmOrder();
@@ -43,11 +43,11 @@ public class ProductTest extends BaseTest {
                 .clickLoginToInventory()
                 .addMultipleItems()
                 .navigateToCart();
-//        ProductPageAsserts.verifyProduct(cartPage.getCartItemDetails());
+        ProductPageAsserts.verifyAllProducts(cartPage.getAllCartItems());
         cartPage.productCheckout()
                 .proceedCheckout()
                 .confirmOrder();
-//        TestContext.clear();
+        TestContext.clear();
         Assert.assertEquals(cartPage.getOrderHeader(),FrameworkConstants.orderHeader);
     }
 }

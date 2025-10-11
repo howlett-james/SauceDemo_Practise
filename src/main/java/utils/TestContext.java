@@ -10,12 +10,10 @@ public class TestContext {
             ThreadLocal.withInitial(ArrayList::new);
 
     public static void setSelectedProduct(Product product) {
-        selectedProducts.get().clear();
         selectedProducts.get().add(product);
     }
 
     public static void setSelectedProducts(List<Product> products) {
-        selectedProducts.get().clear();
         selectedProducts.get().addAll(products);
     }
 

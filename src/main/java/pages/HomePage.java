@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import utils.TestContext;
 import utils.Waits;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class HomePage {
@@ -57,7 +58,7 @@ public class HomePage {
                 : new int[0];
         List<Product> products = new ArrayList<>();
 
-        for (int i : arr) {
+        for (int i = 0; i < arr.length; i++) {
             WebElement randomItem = items.get(arr[i]);
             String name = randomItem.findElement(pName).getText();
             String price = randomItem.findElement(pPrice).getText();
@@ -75,7 +76,7 @@ public class HomePage {
         int size = items.size();
         if (size < 2) throw new IllegalStateException("Need at least 2 items to add!");
 
-        Set<Integer> selectedIndexes = new HashSet<>();//{4,5,2,1}
+        Set<Integer> selectedIndexes = new HashSet<>();
         while (selectedIndexes.size() < 2) {
             selectedIndexes.add(random.nextInt(size));
         }
