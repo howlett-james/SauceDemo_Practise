@@ -14,15 +14,16 @@ pipeline {
             }
         }
 
-        stage('Grant Permission') {
-            steps {
-                sh 'chmod +x gradlew'
-            }
-        }
-
         stage('Build & Test') {
             steps {
-                sh './gradlew clean test'
+                script {
+                    if (isUnix()) {
+                        sh 'chmod +x gradlew'
+                        sh './gradlew clean test'
+                    } else {
+                        bat 'gradlew.bat clean test'
+                    }
+                }
             }
         }
     }
