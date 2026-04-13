@@ -6,12 +6,8 @@
 
     <test name="Tests">
         <classes>
-            <class name="TestScrips.LoginTest">
-                <methods>
-                    <include name="testValidLoginWithRandom"/>
-                </methods>
-            </class>
-<!--            <class name="TestScrips.ProductTest"/>-->
+            <class name="TestScrips.LoginTest"/>
+            <class name="TestScrips.ProductTest"/>
         </classes>
     </test>
 </suite>
