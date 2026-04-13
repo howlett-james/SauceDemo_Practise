@@ -15,7 +15,7 @@ import java.util.List;
 public class CartPage {
     private final WebDriver driver;
     private final By checkoutButton = By.cssSelector(".btn_action.checkout_button");
-    private final By subheader = By.cssSelector(".subheader");
+    private final By checkoutInfo = By.cssSelector(".checkout_info");
     private final By firstName = By.cssSelector("#first-name");
     private final By lastName = By.cssSelector("#last-name");
     private final By postalCode = By.cssSelector("#postal-code");
@@ -40,7 +40,7 @@ public class CartPage {
     }
 
     public CartPage proceedCheckout(){
-        if(Waits.isVisible(driver,subheader)){
+        if(Waits.isVisible(driver,checkoutInfo)){
             Waits.waitForVisibility(driver,firstName).sendKeys(faker.name().firstName());
             Waits.waitForVisibility(driver,lastName).sendKeys(faker.name().lastName());
             Waits.waitForVisibility(driver,postalCode).sendKeys(faker.numerify("######"));

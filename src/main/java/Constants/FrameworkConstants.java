@@ -6,7 +6,7 @@ public class FrameworkConstants {
     public static final String TITLE = "Swag Labs";
     public static final String USERNAME = "standard_user";
     public static final String PASSWORD = "secret_sauce";
-    public static final String orderHeader = "THANK YOU FOR YOUR ORDER";
+    public static final String orderHeader = "Thank you for your order!";
 
     public static final long TIMEOUT = 20;
 }

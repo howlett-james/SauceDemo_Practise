@@ -7,11 +7,7 @@
     <test name="Tests">
         <classes>
             <class name="TestScrips.LoginTest"/>
-            <class name="TestScrips.ProductTest">
-                <methods>
-                    <include name="testRandomProducts"/>
-                </methods>
-            </class>
+            <class name="TestScrips.ProductTest"/>
         </classes>
     </test>
 </suite>
