@@ -63,6 +63,8 @@ public class LoginPage {
 
     public String getRandomCredential() {
         List<String> creds = getCredentials();
-        return creds.get(random.nextInt(creds.size())); // pick random index
+        String randomCred = creds.get(random.nextInt(creds.size()));
+        System.out.println(randomCred);
+        return randomCred;
     }
 }
