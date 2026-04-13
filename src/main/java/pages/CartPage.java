@@ -25,6 +25,8 @@ public class CartPage {
     private final By finishBtn = By.cssSelector(".btn_action.cart_button");
     private final By orderHeader = By.cssSelector(".complete-header");
 
+    private final Faker faker = new Faker();
+
     public CartPage() {
         this.driver = DriverFactory.getDriver();
         if (this.driver == null) throw new IllegalStateException("WebDriver is null");
@@ -39,9 +41,9 @@ public class CartPage {
 
     public CartPage proceedCheckout(){
         if(Waits.isVisible(driver,subheader)){
-            Waits.waitForVisibility(driver,firstName).sendKeys(new Faker().name().firstName());
-            Waits.waitForVisibility(driver,lastName).sendKeys(new Faker().name().lastName());
-            Waits.waitForVisibility(driver,postalCode).sendKeys(new Faker().numerify("######"));
+            Waits.waitForVisibility(driver,firstName).sendKeys(faker.name().firstName());
+            Waits.waitForVisibility(driver,lastName).sendKeys(faker.name().lastName());
+            Waits.waitForVisibility(driver,postalCode).sendKeys(faker.numerify("######"));
         }
         if(Waits.isVisible(driver,continueBtn) && Waits.isClickable(driver,continueBtn)){
             Waits.waitForClickability(driver,continueBtn).click();
