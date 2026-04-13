@@ -20,7 +20,7 @@ public class ProductTest extends BaseTest {
         cartPage = new CartPage();
     }
 
-    @Test
+    @Test(priority = 3)
     public void testRandomProduct(){
         loginPage.enterUsername(FrameworkConstants.USERNAME)
                 .enterPassword(FrameworkConstants.PASSWORD)
@@ -36,7 +36,7 @@ public class ProductTest extends BaseTest {
         Assert.assertEquals(cartPage.getOrderHeader(),FrameworkConstants.orderHeader);
     }
 
-    @Test
+    @Test(priority = 4)
     public void testRandomProducts(){
         loginPage.enterUsername(FrameworkConstants.USERNAME)
                 .enterPassword(FrameworkConstants.PASSWORD)
